@@ -46,7 +46,10 @@ async def getImdbId(jwUrl: str) -> str:
     rgxExpo = get_config("A", "A")
     mbSrchPoxe = re.search(rgxExpo, two)
     if mbSrchPoxe:
-        return mbSrchPoxe.group(1)
+        mbId = mbSrchPoxe.group(1)
+        if ":" in mbId:
+            mbId = mbId.split(":")[0].strip()
+        return mbId
 
 
 async def jw():
