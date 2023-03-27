@@ -65,7 +65,7 @@ async def jw():
         "variables": {
             "first": int(get_config("H", "100")),
             "pageType": "NEW",
-            "date": f"{yyyy}-{mm}-{dd - 3}",
+            "date": f"{yyyy}-{mm - 1}-{dd}",
             "filter": {
                 "ageCertifications": [],
                 "excludeGenres": [],
