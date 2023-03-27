@@ -19,9 +19,10 @@ def LOGGER(name: str) -> logging.Logger:
 """ import statements """
 
 import asyncio
-from aiohttp import ClientSession
 import os
 import re
+from aiohttp import ClientSession
+from datetime import datetime
 
 
 """ wrapper for getting the credentials """
@@ -55,12 +56,16 @@ async def getImdbId(jwUrl: str) -> str:
 async def jw():
     D = get_config("D", "D")
     F = get_config("F", "F")
+    ct = datetime.now()
+    yyyy = ct.year
+    mm = ct.month
+    dd = ct.day
     jsonData = {
         "operationName": get_config("C", "C"),
         "variables": {
-            "first": 50,
+            "first": 100,
             "pageType": "NEW",
-            "date": "2023-01-01",
+            "date": f"{yyyy}-{mm}-{dd - 3}",
             "filter": {
                 "ageCertifications": [],
                 "excludeGenres": [],
@@ -95,6 +100,7 @@ async def jw():
     totalCount = newTitles.get("totalCount", 0)
     LOGGER("TOTAL COUNT: ").info(totalCount)
     edges = newTitles.get("edges", [])
+    LOGGER("COUNT: ").info(len(edges))
     for edge in edges:
         jwId = edge.get("node").get("id")
         content = edge.get("node").get("content")
