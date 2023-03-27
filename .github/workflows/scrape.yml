@@ -32,6 +32,7 @@ jobs:
         E: ${{ secrets.E }}
         F: ${{ secrets.F }}
         G: ${{ secrets.G }}
+        H: ${{ secrets.H }}
       run: python jw.py
 
     - name: Commit and push changes.

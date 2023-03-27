@@ -63,7 +63,7 @@ async def jw():
     jsonData = {
         "operationName": get_config("C", "C"),
         "variables": {
-            "first": 100,
+            "first": int(get_config("H", "100")),
             "pageType": "NEW",
             "date": f"{yyyy}-{mm}-{dd - 3}",
             "filter": {
