@@ -59,13 +59,18 @@ async def jw():
     ct = datetime.now()
     yyyy = ct.year
     mm = ct.month
+    mm = mm - 1
+    if mm < 10:
+        mm = f"0{mm}"
     dd = ct.day
+    if dd < 10:
+        dd = f"0{dd}"
     jsonData = {
         "operationName": get_config("C", "C"),
         "variables": {
             "first": int(get_config("H", "100")),
             "pageType": "NEW",
-            "date": f"{yyyy}-{mm - 1}-{dd}",
+            "date": f"{yyyy}-{mm}-{dd}",
             "filter": {
                 "ageCertifications": [],
                 "excludeGenres": [],
@@ -96,6 +101,7 @@ async def jw():
             json=jsonData
         )
         second_response = await one_response.json()
+    LOGGER("API: ").info(second_response)
     newTitles = second_response.get("data").get("newTitles")
     totalCount = newTitles.get("totalCount", 0)
     LOGGER("TOTAL COUNT: ").info(totalCount)
