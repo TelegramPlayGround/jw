@@ -101,7 +101,10 @@ async def jw():
         fullPath = D + content.get("fullPath", "")
         imdbId = await getImdbId(fullPath)
         title = content.get("title", "")
-        if not os.path.exists(imdbId):
+        if (
+            imdbId and
+            not os.path.exists(imdbId)
+        ):
             async with ClientSession() as session:
                 one = await session.post(
                     f"https://api.telegram.org/bot{F}/createForumTopic",
