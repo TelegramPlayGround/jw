@@ -59,10 +59,10 @@ async def jw():
     ct = datetime.now()
     yyyy = ct.year
     mm = ct.month
-    mm = mm - 1
     if mm < 10:
         mm = f"0{mm}"
     dd = ct.day
+    dd = dd - 1
     if dd < 10:
         dd = f"0{dd}"
     jsonData = {
@@ -129,6 +129,6 @@ async def jw():
             mtId = two.get("result").get("message_thread_id")
             with open(imdbId, "w+") as fod:
                 fod.write(f"{jwId}\n{mtId}")
-        await asyncio.sleep(10)
+            await asyncio.sleep(10)
 
 asyncio.run(jw())
